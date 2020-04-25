@@ -24,10 +24,19 @@ public class Page {
 
     public Page (String pageName, String pageType, String pageCategory, int pageNumber)
     {
-        this.pageName = pageName;
+        if (pageName.equals(""))
+            this.pageName = "My Page";
+        else
+            this.pageName = pageName;
+
         pageType = convertPageType(pageType);
         this.pageType = pageType;
-        this.pageCategory = pageCategory;
+
+        if (pageName.equals(""))
+            this.pageCategory = "Undefined";
+        else
+            this.pageCategory = pageCategory;
+
         this.pageNumber = pageNumber;
         System.out.println("Page Created.");
     }
@@ -44,6 +53,8 @@ public class Page {
         else if (type.equals("c"))
             type = "Collection";
         else if (type.equals("b"))
+            type = "Blank";
+        else
             type = "Blank";
 
         return type;

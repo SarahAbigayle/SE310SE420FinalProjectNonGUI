@@ -28,25 +28,7 @@ public class MainActivity {
     public static void main(String[] args) {
 
         while (closeApp == 0) {
-            System.out.println("List of all journals:");
-            
-            if (journalVector.size() == 0) {
-                System.out.println("No journals. Create a journal? (y/n)");
-
-                if (System.console().readLine().equals("y"))
-                {
-                    createJournal();
-                }
-                else 
-                {
-                    closeApp = 1;
-                }
-            }
-            else 
-            {   
-                viewJournalsMenu();
-            }
-
+            viewJournalsMenu();
         }
     }
 

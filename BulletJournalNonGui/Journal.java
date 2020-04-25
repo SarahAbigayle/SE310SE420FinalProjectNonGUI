@@ -27,7 +27,11 @@ public class Journal {
     private int closePageMenu = 0;
 
     public Journal(String journalName, String journalCoverColour) {
-        this.journalName = journalName;
+        if (journalName.equals(""))
+            this.journalName = "My Journal";
+        else
+            this.journalName = journalName;
+        
         this.journalCoverColour = journalCoverColour;
         System.out.println("Journal Created.");
     }
@@ -52,27 +56,12 @@ public class Journal {
         numberOfPages++;
     }
 
-    public Vector<Page> returnPageVector() { 
-        return pageVector;
-    }
-
     public void openJournal() {
         while (closePageMenu == 0){
-            System.out.println("List of all pages in journal " + returnJournalName() + ":");
-
-            if (pageVector.size() == 0) {
-                System.out.println("No pages. Create a page? (y/n)");
-
-                if (System.console().readLine().equals("y"))
-                {
-                    createPage();
-                }
-            }
-            else 
-            {   
-                pageMenu();
-            }
+            pageMenu();
         }
+
+        closePageMenu = 0;
     }
 
     public void pageMenu() {

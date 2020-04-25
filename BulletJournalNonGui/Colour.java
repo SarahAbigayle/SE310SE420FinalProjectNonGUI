@@ -20,6 +20,8 @@ public class Colour {
             colour = Colour.ANSI_BLUE;
         else if (colour.equals("p"))
             colour = Colour.ANSI_PURPLE;
+        else
+            colour = Colour.ANSI_RED;
 
         return colour;
     }
