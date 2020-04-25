@@ -40,20 +40,45 @@ public class Journal {
         return (journalCoverColour + journalName + Colour.ANSI_RESET);
     }
 
+    public void changeCoverColour(String newColour) {
+        this.journalCoverColour = newColour;
+    }
+
+    public void changeJournalName(String newName) {
+        if (newName.equals("")) {
+            System.out.println(Colour.ANSI_RED + "No journal name entered. Journal name is defaulting to: 'My Journal'" + Colour.ANSI_RESET);
+            this.journalName = "My Journal";
+        }
+        else
+        {
+            this.journalName = newName;
+        }
+    }
+
     public String returnCoverColour() {
         return journalCoverColour;
     }
 
     public void createPage() {
-        System.out.println("Enter page name: ");
-        String name = System.console().readLine();
-        System.out.println("Enter page type (p - planner, g - grid, c - collection, b - blank)");
-        String type = System.console().readLine();
-        System.out.println("Enter page category: ");
-        String category = System.console().readLine();
+        if (MainActivity.returnPageCount() < 150)
+        {
+            System.out.println("Enter page name: ");
+            String name = System.console().readLine();
+            System.out.println("Enter page type (p - planner, g - grid, c - collection, b - blank)");
+            String type = System.console().readLine();
+            System.out.println("Enter page category: ");
+            String category = System.console().readLine();
 
-        pageVector.add(new Page(name, type, category, numberOfPages));
-        numberOfPages++;
+            pageVector.add(new Page(name, type, category, numberOfPages));
+            numberOfPages++;
+            MainActivity.incrementPageCounter();
+        }
+        else
+        {
+            System.out.println(Colour.ANSI_RED + "Maximum number of pages reached" + Colour.ANSI_RESET);
+
+        }
+
     }
 
     public void openJournal() {
@@ -69,8 +94,8 @@ public class Journal {
         for (int i = 1; i <= pageVector.size(); i++) {
             System.out.println("   " + i + " - edit " + pageVector.get(i - 1).returnPageDetails());
         }
-        System.out.println("   d - Delete a page");
         System.out.println("   c - create a new page");
+        System.out.println("   d - Delete a page");
         System.out.println("   e - exit to journals screen");
 
         String decision = System.console().readLine();
@@ -96,6 +121,7 @@ public class Journal {
                 decision = System.console().readLine();
                 pageVector.remove(Integer.parseInt(decision) - 1);
                 numberOfPages--;
+                MainActivity.decrementPageCounter();
                 break;
             case "c":
                 createPage();

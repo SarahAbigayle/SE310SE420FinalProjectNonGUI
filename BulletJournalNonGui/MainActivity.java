@@ -38,8 +38,10 @@ public class MainActivity {
         for (int i = 1; i <= journalVector.size(); i++) {
             System.out.println("   " + i + " - open " + journalVector.get(i - 1).returnJournalName());
         }
-        System.out.println("   d - Delete a journal");
         System.out.println("   c - create a new journal");
+        System.out.println("   h - change the colour of a journal");
+        System.out.println("   n - change the name of a journal");
+        System.out.println("   d - Delete a journal");
         System.out.println("   e - exit app");
 
         String decision = System.console().readLine();
@@ -70,6 +72,21 @@ public class MainActivity {
                 decision = System.console().readLine();
                 journalVector.remove(Integer.parseInt(decision) - 1);
                 totalJournalNumber--;
+                break;
+            case "h":
+                System.out.println("Which journal's colour would you like to change? 1/2/3/4/5");
+                decision = System.console().readLine();
+                System.out.println("Enter new cover colour: (r = red/y = yellow/g = green/c = cyan/b = blue/p = purple)");
+                String colourChange = System.console().readLine();
+                colourChange = Colour.convertColour(colourChange);
+                journalVector.get(Integer.parseInt(decision) - 1).changeCoverColour(colourChange);
+                break;
+            case "n":
+                System.out.println("Which journal's name would you like to change? 1/2/3/4/5");
+                decision = System.console().readLine();
+                System.out.println("Enter new journal name:");
+                String nameChange = System.console().readLine();
+                journalVector.get(Integer.parseInt(decision) - 1).changeJournalName(nameChange);
                 break;
             case "c":
                 createJournal();
@@ -104,9 +121,15 @@ public class MainActivity {
 
     public static void incrementPageCounter() {
         totalPageNumber++;
+        System.out.println(totalPageNumber);
     }
 
     public static void decrementPageCounter() {
         totalPageNumber--;
+        System.out.println(totalPageNumber);
+    }
+
+    public static int returnPageCount() {
+        return totalPageNumber;
     }
 }
