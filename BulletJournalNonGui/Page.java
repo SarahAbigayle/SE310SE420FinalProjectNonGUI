@@ -17,6 +17,7 @@
 */
 
 public class Page {
+    // Variables that belong to the Page class
     private String pageName;
     private String pageType;
     private String pageCategory;
@@ -24,15 +25,18 @@ public class Page {
 
     public Page (String pageName, String pageType, String pageCategory, int pageNumber)
     {
+        // If no page is entered, the page is named "My Page" by default
         if (pageName.equals(""))
             this.pageName = "My Page";
         else
             this.pageName = pageName;
 
+        // Converts the single letter that the user entered into a page type for convenience
         pageType = convertPageType(pageType);
         this.pageType = pageType;
 
-        if (pageName.equals(""))
+        // If no page category is entere, the page is placed under the "Undefined" category
+        if (pageCategory.equals(""))
             this.pageCategory = "Undefined";
         else
             this.pageCategory = pageCategory;
@@ -46,6 +50,7 @@ public class Page {
     }
 
     public String convertPageType(String type) {
+        // Converts the user's entry of a single letter into a full string
         if (type.equals("p"))
             type = "Planner";
         else if (type.equals("g"))
@@ -55,7 +60,7 @@ public class Page {
         else if (type.equals("b"))
             type = "Blank";
         else
-            type = "Blank";
+            type = "Blank"; // if the user enters a letter not allowed, defaults to the Blank type of page
 
         return type;
     }
