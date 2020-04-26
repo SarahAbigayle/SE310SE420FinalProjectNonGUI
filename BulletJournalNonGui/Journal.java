@@ -131,4 +131,15 @@ public class Journal {
         }
     }
 
+    public void createPageForTest(String name, String type, String category) {
+        pageVector.add(new Page(name, type, category, numberOfPages));
+        numberOfPages++;
+    }
+
+    public void openJournalForTest()
+    {
+        for (int i = 0; i < pageVector.size(); i++) { // prints the pages that have been created
+            System.out.println(pageVector.get(i).returnPageDetails());
+        }
+    }
 }
